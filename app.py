@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf
 import time
+import gdown
 
 # ─────────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -161,14 +162,30 @@ IMG_SIZE = (224, 224)
 # LOAD MODELS
 # ─────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────
+# LOAD MODELS
+# ─────────────────────────────────────────────────────────────────
+
+
+
 @st.cache_resource
 def load_densenet():
-    path = os.path.join(BASE_DIR, "models", "DenseNet121_model.h5")
+    path = "DenseNet121_model.h5"
+    if not os.path.exists(path):
+        gdown.download(
+            "https://drive.google.com/uc?id=14UlJawF4oT4IHgWo4wegC4xizg6oF0gG",
+            path, quiet=False
+        )
     return tf.keras.models.load_model(path)
 
 @st.cache_resource
 def load_resnet():
-    path = os.path.join(BASE_DIR, "models", "ResNet.h5")
+    path = "ResNet.h5"
+    if not os.path.exists(path):
+        gdown.download(
+            "https://drive.google.com/uc?id=1zo3QEEGrUrEGYWYFfH8IeEFodRzVC8pC",
+            path, quiet=False
+        )
     return tf.keras.models.load_model(path)
 
 # ─────────────────────────────────────────────────────────────────
